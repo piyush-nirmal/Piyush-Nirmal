@@ -1,0 +1,1422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Piyush Nirmal | Data Professional</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Three.js for the dynamic background -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <!-- FONT CHANGE: Swapping Inter for Roboto -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        /* Define custom colors and typography for LIGHT MODE */
+        :root {
+            /* Light Background (White/Very Light Gray) */
+            --color-bg-light: #ffffff; 
+            /* Dark Red/Maroon Accent (Similar to the reference site's logo color) */
+            --color-accent: #c53030; 
+            /* Dark Text Color */
+            --color-text-dark: #1f2937; 
+            /* Light Gray for Card Backgrounds */
+            --color-bg-card: #f3f4f6;
+        }
+        
+        body {
+            /* FONT CHANGE: Applying Roboto */
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--color-bg-light);
+            color: var(--color-text-dark);
+            scroll-behavior: smooth;
+            overflow-x: hidden; 
+        }
+
+        /* 1. HERO SECTION DYNAMIC BACKGROUND STYLES */
+        main {
+            position: relative;
+            z-index: 1;
+        }
+
+        #home {
+            position: relative;
+            overflow: hidden;
+            background-color: transparent;
+        }
+
+        /* Canvas for Three.js particles */
+        #particle-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        /* Ensure hero content still above the fixed canvas */
+        #home > div {
+            position: relative;
+            z-index: 10;
+        }
+
+
+        /* 2. SCROLL ANIMATION STYLES (Slide Up/Fade In) */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            /* Animation duration reduced from 0.8s to 0.5s */
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+        }
+
+        .animate-on-scroll.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Floating navigation */
+    .floating-nav-wrapper {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 40;
+        display: flex;
+        justify-content: center;
+        padding: 1rem 0.75rem;
+        pointer-events: none;
+    }
+
+    /* Logo loop */
+    .trusted-logos {
+        padding: 4rem 1.5rem 2rem;
+        background: #fff;
+    }
+    .trusted-logos__inner {
+        max-width: 1100px;
+        margin: 0 auto;
+        text-align: center;
+    }
+    .trusted-logos__eyebrow {
+        font-size: 0.9rem;
+        font-weight: 600;
+        letter-spacing: 0.25em;
+        color: var(--color-accent);
+        text-transform: uppercase;
+    }
+    .trusted-logos__title {
+        font-size: 2rem;
+        font-weight: 700;
+        color: #111827;
+        margin: 0.75rem 0 1.5rem;
+    }
+    .logoloop {
+        position: relative;
+        overflow: hidden;
+        width: 100%;
+        padding: 1.25rem 0;
+        mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+        -webkit-mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+    }
+    .logoloop__track {
+        display: flex;
+        align-items: center;
+        flex-wrap: nowrap;
+        gap: clamp(2rem, 5vw, 4rem);
+        animation: logoloop-scroll 20s linear infinite;
+    }
+    .logoloop__track:hover {
+        animation-play-state: paused;
+    }
+    .logoloop__item {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 140px;
+        min-height: 70px;
+        padding: 0.9rem 1.5rem;
+        border-radius: 999px;
+        border: 1px solid rgba(15, 23, 42, 0.08);
+        background: #fff;
+        box-shadow: 0 8px 20px rgba(15, 23, 42, 0.07);
+    }
+    .logoloop__item img,
+    .logoloop__item svg {
+        height: clamp(28px, 5vw, 44px);
+        width: auto;
+        object-fit: contain;
+        filter: grayscale(0);
+    }
+    @keyframes logoloop-scroll {
+        0% {
+            transform: translateX(0);
+        }
+        100% {
+            transform: translateX(-50%);
+        }
+    }
+    @media (max-width: 768px) {
+        .trusted-logos {
+            padding: 3rem 1rem 1.5rem;
+        }
+        .trusted-logos__title {
+            font-size: 1.5rem;
+        }
+        .logoloop__item {
+            min-width: 110px;
+            font-size: 0.85rem;
+            padding: 0.7rem 1rem;
+        }
+    }
+
+    .floating-nav {
+        width: min(1100px, 94vw);
+        background: rgba(255, 255, 255, 0.92);
+        border-radius: 999px;
+        box-shadow: 0 20px 45px rgba(15, 23, 42, 0.12);
+        border: 1px solid rgba(15, 23, 42, 0.06);
+        backdrop-filter: blur(18px);
+        padding: 0.6rem 1.5rem;
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        pointer-events: auto;
+        transition: box-shadow 0.3s ease, transform 0.3s ease, background 0.3s ease;
+    }
+
+    .floating-nav.is-floating {
+        background: rgba(255, 255, 255, 0.98);
+        box-shadow: 0 35px 65px rgba(15, 23, 42, 0.18);
+        transform: translateY(4px);
+    }
+
+    .floating-nav-brand {
+        font-size: 1.1rem;
+        font-weight: 700;
+        letter-spacing: 0.18em;
+        color: #0f172a;
+        text-transform: uppercase;
+        display: flex;
+        align-items: baseline;
+        gap: 0.35rem;
+    }
+
+    .floating-nav-links {
+        display: flex;
+        align-items: center;
+        gap: 1.25rem;
+        margin-left: auto;
+    }
+
+    .floating-nav-links a {
+        text-decoration: none;
+        font-weight: 600;
+        color: #0f172a;
+        letter-spacing: 0.08em;
+        font-size: 0.95rem;
+        transition: color 0.3s ease;
+    }
+
+    .floating-nav-links a:hover {
+        color: var(--color-accent);
+    }
+
+    .floating-nav-toggle {
+        display: none;
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        border: none;
+        background: #0f172a;
+        color: #fff;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 6px;
+        cursor: pointer;
+    }
+
+    .floating-nav-toggle span {
+        display: block;
+        width: 18px;
+        height: 2px;
+        background: currentColor;
+        border-radius: 999px;
+        transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    .floating-nav-toggle.is-open span:first-child {
+        transform: translateY(4px) rotate(45deg);
+    }
+
+    .floating-nav-toggle.is-open span:last-child {
+        transform: translateY(-4px) rotate(-45deg);
+    }
+
+    @media (max-width: 768px) {
+        .floating-nav {
+            width: 100%;
+            border-radius: 24px;
+            padding: 0.75rem 1rem;
+            flex-direction: column;
+            align-items: stretch;
+            gap: 0.75rem;
+        }
+        .floating-nav-brand {
+            font-size: 0.9rem;
+            letter-spacing: 0.12em;
+        }
+        .floating-nav-links {
+            width: 100%;
+            flex-direction: column;
+            align-items: stretch;
+            display: none;
+            margin-left: 0;
+            gap: 0.5rem;
+        }
+        .floating-nav-links.is-open {
+            display: flex;
+        }
+        .floating-nav-links a {
+            padding: 0.65rem 0.9rem;
+            border-radius: 16px;
+            background: rgba(15, 23, 42, 0.04);
+            text-align: center;
+        }
+        .floating-nav-toggle {
+            display: inline-flex;
+            margin-left: auto;
+        }
+    }
+
+        /* Accent text/icons */
+        .text-accent {
+            color: var(--color-accent);
+        }
+        
+        /* Icon container styling */
+        .project-icon {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: rgba(197, 48, 48, 0.1); /* Light background for the icon */
+            color: var(--color-accent);
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+
+        /* Button styling matching the light theme and dark red accent */
+        .btn-accent {
+            background-color: var(--color-accent);
+            color: #ffffff; /* White text on bright button */
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 4px 10px rgba(197, 48, 48, 0.3);
+        }
+        .btn-accent:hover {
+            background-color: #9b2c2c; /* Darker red on hover */
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(197, 48, 48, 0.4);
+        }
+
+        /* Card styling for modern, clean separation */
+        .project-card {
+            background-color: var(--color-bg-card);
+            border: 1px solid #e5e7eb;
+            transition: transform 0.4s ease-in-out, box-shadow 0.4s ease-in-out;
+        }
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            border-color: var(--color-accent);
+        }
+
+        /* Immersive project stories */
+        .project-showcase {
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem;
+            margin-top: 3.5rem;
+        }
+
+        .project-showcase__card {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            padding: clamp(1.5rem, 4vw, 2.5rem);
+            border-radius: 2.25rem;
+            border: 1px solid rgba(15, 23, 42, 0.08);
+            background: radial-gradient(circle at 15% 20%, rgba(197, 48, 48, 0.12), transparent 55%), #fff;
+            box-shadow: 0 30px 80px rgba(15, 23, 42, 0.12);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-showcase__card::before {
+            content: '';
+            position: absolute;
+            inset: 12px;
+            border-radius: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.45);
+            pointer-events: none;
+        }
+
+        .project-showcase__media {
+            border-radius: 1.5rem;
+            overflow: hidden;
+            min-height: 220px;
+            max-height: 360px;
+            background: #f3f4f6;
+        }
+
+        .project-showcase__media img {
+            width: 100%;
+            height: 100%;
+            max-height: 360px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .project-showcase__content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .project-showcase__card--cta {
+            grid-template-columns: 1fr;
+            text-align: center;
+            background: linear-gradient(135deg, #c53030, #ff8a65);
+            color: #fff;
+        }
+
+        .project-showcase__card--cta::before {
+            border-color: rgba(255, 255, 255, 0.45);
+        }
+
+        .project-showcase__card--cta .project-showcase__desc {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .project-showcase__card--cta .project-badge {
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+        }
+
+        .project-showcase__eyebrow {
+            text-transform: uppercase;
+            letter-spacing: 0.35em;
+            font-size: 0.8rem;
+            color: var(--color-accent);
+            margin-bottom: 0.8rem;
+        }
+
+        .project-showcase__title {
+            font-size: clamp(1.8rem, 3vw, 2.5rem);
+            font-weight: 700;
+            color: #111827;
+            margin-bottom: 1rem;
+        }
+
+        .project-showcase__desc {
+            color: #4b5563;
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-showcase__badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            padding: 0.45rem 1rem;
+            border-radius: 999px;
+            background: rgba(15, 23, 42, 0.06);
+            font-size: 0.92rem;
+            color: #1f2937;
+            font-weight: 600;
+        }
+
+        .project-showcase__cta {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .project-showcase__cta .btn-accent {
+            box-shadow: 0 15px 35px rgba(197, 48, 48, 0.35);
+        }
+
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-weight: 600;
+            color: #111827;
+        }
+
+        .project-link svg {
+            width: 1rem;
+            height: 1rem;
+        }
+
+        .project-showcase__card--cta .project-link {
+            color: #fff;
+        }
+
+        .project-showcase__card--cta .cta-ghost {
+            background: #fff;
+            color: var(--color-accent);
+            font-weight: 600;
+            border-radius: 999px;
+            padding: 0.85rem 2.5rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.18);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .project-showcase__card--cta .cta-ghost:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.24);
+        }
+
+        @media (max-width: 1024px) {
+            h1 {
+                font-size: clamp(2.5rem, 6vw, 4.5rem);
+            }
+            .floating-nav {
+                flex-wrap: wrap;
+                gap: 0.75rem;
+            }
+            .floating-nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .project-showcase__card {
+                grid-template-columns: 1fr;
+                padding: 2rem;
+            }
+            .project-showcase__media {
+                min-height: 200px;
+                max-height: 280px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                font-size: 0.95rem;
+            }
+            h2 {
+                font-size: 1.75rem;
+            }
+            .trusted-logos__title {
+                font-size: 1.35rem;
+            }
+            .project-showcase__card {
+                border-radius: 1.5rem;
+                padding: 1.5rem;
+                gap: 1.5rem;
+            }
+            .project-showcase__media {
+                min-height: 180px;
+                max-height: 240px;
+            }
+            .project-showcase__cta {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .project-showcase__card--cta .project-showcase__cta {
+                align-items: center;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .floating-nav-brand {
+                font-size: 1rem;
+            }
+            .floating-nav-links {
+                flex-direction: column;
+            }
+            #home {
+                padding: 4rem 1.25rem;
+            }
+            .project-showcase__title {
+                font-size: 1.5rem;
+            }
+            .project-showcase__badges {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .project-showcase__media {
+                max-height: 200px;
+            }
+            .project-showcase__cta .btn-accent,
+            .project-showcase__cta .cta-ghost {
+                width: 100%;
+                text-align: center;
+            }
+        }
+
+        /* Style for section headings */
+        h2 {
+            font-size: 2.25rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--color-accent);
+            display: inline-block;
+        }
+
+        /* Skill Chip Styling */
+        .skill-chip {
+            border: 1px solid var(--color-accent);
+            background-color: rgba(197, 48, 48, 0.1);
+            color: var(--color-accent);
+            transition: background-color 0.3s;
+        }
+        .skill-chip:hover {
+             background-color: rgba(197, 48, 48, 0.2);
+        }
+        
+        /* Nav link text color for light mode */
+        .nav-link {
+            color: var(--color-text-dark);
+        }
+        .nav-link:hover {
+            color: var(--color-accent);
+        }
+        
+        /* Styling for the dedicated CTA card */
+        .cta-card {
+            background-color: var(--color-accent);
+            color: white;
+            border: none;
+            box-shadow: 0 10px 20px rgba(197, 48, 48, 0.4);
+            transition: transform 0.4s ease-in-out;
+        }
+        .cta-card:hover {
+             transform: translateY(-5px);
+             box-shadow: 0 15px 30px rgba(197, 48, 48, 0.6);
+        }
+        .cta-card h3 {
+            color: white !important;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Floating Navigation -->
+    <div class="floating-nav-wrapper">
+        <nav id="navbar" class="floating-nav" aria-label="Primary navigation">
+            <div class="floating-nav-brand">
+                PIYUSH NIRMAL <span class="text-accent">/ DATA ANALYST </span>
+            </div>
+            <button class="floating-nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+                <span></span>
+                <span></span>
+            </button>
+            <div class="floating-nav-links">
+                <a href="#home" class="nav-link">Home</a>
+                <a href="#skills" class="nav-link">Skills</a>
+                <a href="#experience" class="nav-link">Experience</a>
+                <a href="#projects" class="nav-link">Projects</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
+        </nav>
+    </div>
+
+    <main class="pt-32">
+        
+        <!-- 1. Hero Section -->
+        <section id="home" class="min-h-screen flex items-center justify-center text-center p-8">
+            
+            <!-- Three.js Canvas Placeholder -->
+            <canvas id="particle-canvas"></canvas>
+            
+            <!-- Ensure content is wrapped and has high z-index over the background grid -->
+            <div class="max-w-4xl mx-auto z-10"> 
+                <p class="text-lg text-accent mb-4 uppercase tracking-wider animate-on-scroll">Hi, I'm Piyush Nirmal</p>
+                <h1 class="text-6xl sm:text-7xl md:text-8xl font-extrabold leading-tight mb-6 text-gray-900 animate-on-scroll" style="transition-delay: 0.1s;">
+                    Data-Driven Solutions.
+                    <span class="text-accent block mt-4">ML & Generative AI.</span>
+                </h1>
+                <p class="text-xl text-gray-600 mb-10 max-w-3xl mx-auto animate-on-scroll" style="transition-delay: 0.2s;">
+                    A highly motivated and results-driven data professional passionate about transforming complex datasets into actionable insights and building data-driven solutions. Skilled in dashboard creation, machine learning, automation, and visualization.
+                </p>
+                <div class="flex justify-center space-x-4 animate-on-scroll" style="transition-delay: 0.3s;">
+                    <a href="#projects" class="btn-accent py-3 px-8 rounded-lg text-lg font-semibold">
+                        View Projects
+                    </a>
+                    <a href="https://www.linkedin.com/in/piyush-nirmal" target="_blank" class="bg-transparent text-accent border border-accent py-3 px-8 rounded-lg text-lg font-semibold hover:bg-accent hover:text-white transition duration-300">
+                        Connect on LinkedIn
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Logo Loop Section -->
+        <section class="trusted-logos" aria-label="Trusted partners">
+            <div class="trusted-logos__inner">
+                <p class="trusted-logos__eyebrow">Trusted By Teams</p>
+                <h2 class="trusted-logos__title">Collaborations & Hackathons</h2>
+                <div class="logoloop" data-logoloop>
+                    <div class="logoloop__track">
+                        <div class="logoloop__item">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/c/cf/New_Power_BI_Logo.svg" alt="Power BI logo" loading="lazy" decoding="async" />
+                        </div>
+                        <div class="logoloop__item">
+                            <img src="https://upload.wikimedia.org/wikipedia/en/d/dd/MySQL_logo.svg" alt="MySQL logo" loading="lazy" decoding="async" />
+                        </div>
+                        <div class="logoloop__item">
+                            <svg viewBox="0 0 120 60" role="img" aria-label="Excel logo">
+                                <title>Microsoft Excel</title>
+                                <defs>
+                                    <linearGradient id="excelGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" stop-color="#0E783B" />
+                                        <stop offset="100%" stop-color="#0A5529" />
+                                    </linearGradient>
+                                </defs>
+                                <rect width="120" height="60" rx="18" fill="#0B6623" opacity="0.18" />
+                                <rect x="20" y="10" width="80" height="40" rx="10" fill="url(#excelGradient)" />
+                                <text x="60" y="39" text-anchor="middle" font-size="32" font-family="Segoe UI, Arial, sans-serif" fill="#fff" font-weight="700">X</text>
+                            </svg>
+                        </div>
+                        <div class="logoloop__item">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Kaggle_logo.png" alt="Kaggle logo" loading="lazy" decoding="async" />
+                        </div>
+                        <div class="logoloop__item">
+                            <svg viewBox="0 0 120 60" role="img" aria-label="Google Gemini logo">
+                                <title>Google Gemini</title>
+                                <defs>
+                                    <linearGradient id="geminiGradientA" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" stop-color="#4F8DF5" />
+                                        <stop offset="100%" stop-color="#7648EA" />
+                                    </linearGradient>
+                                    <linearGradient id="geminiGradientB" x1="100%" y1="0%" x2="0%" y2="100%">
+                                        <stop offset="0%" stop-color="#4DD9FF" />
+                                        <stop offset="100%" stop-color="#4F8DF5" />
+                                    </linearGradient>
+                                </defs>
+                                <rect width="120" height="60" rx="18" fill="#4F8DF5" opacity="0.12" />
+                                <circle cx="48" cy="30" r="16" fill="url(#geminiGradientA)" />
+                                <circle cx="72" cy="30" r="16" fill="url(#geminiGradientB)" />
+                            </svg>
+                        </div>
+                        <div class="logoloop__item">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg" alt="Python logo" loading="lazy" decoding="async" />
+                        </div>
+                        <div class="logoloop__item">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/9/93/MongoDB_Logo.svg" alt="MongoDB logo" loading="lazy" decoding="async" />
+                        </div>
+                        <div class="logoloop__item">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/3/38/Jupyter_logo.svg" alt="Jupyter Notebook logo" loading="lazy" decoding="async" />
+                        </div>
+                        <div class="logoloop__item">
+                            <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub logo" loading="lazy" decoding="async" />
+                        </div>
+                        <div class="logoloop__item">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/b/b8/Netlify_logo.svg" alt="Netlify logo" loading="lazy" decoding="async" />
+                        </div>
+                        <div class="logoloop__item">
+                            <img src="https://julius.ai/android-chrome-192x192.png" alt="Julius AI logo" loading="lazy" decoding="async" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. Skills & Expertise -->
+        <section id="skills" class="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50">
+            <div class="max-w-7xl mx-auto">
+                <h2 class="text-center mx-auto text-gray-900 animate-on-scroll">Skills & Expertise</h2>
+                
+                <!-- Skill Categories -->
+                <div class="grid md:grid-cols-3 gap-10 mt-12">
+
+                    <!-- Category 1: Core Data Stack -->
+                    <div class="p-6 rounded-xl bg-white border border-gray-200 hover:border-accent transition duration-300 shadow-lg animate-on-scroll">
+                        <h3 class="text-2xl font-semibold mb-4 text-accent">Core Data Stack</h3>
+                        <div class="flex flex-wrap gap-3">
+                            <span class="skill-chip px-3 py-1 rounded-full text-sm">Python</span>
+                            <span class="skill-chip px-3 py-1 rounded-full text-sm">SQL (MySQL)</span>
+                            <span class="skill-chip px-3 py-1 rounded-full text-sm">Power BI</span>
+                            <span class="skill-chip px-3 py-1 rounded-full text-sm">Generative AI Tools (Julius AI)</span>
+                            <span class="skill-chip px-3 py-1 rounded-full text-sm">Numpy & Pandas</span>
+                        </div>
+                    </div>
+
+                    <!-- Category 2: Machine Learning & Vision -->
+                    <div class="p-6 rounded-xl bg-white border border-gray-200 hover:border-accent transition duration-300 shadow-lg animate-on-scroll" style="transition-delay: 0.1s;">
+                        <h3 class="text-2xl font-semibold mb-4 text-accent">ML & Vision</h3>
+                        <div class="flex flex-wrap gap-3">
+                            <span class="skill-chip px-3 py-1 rounded-full text-sm">Random Forest Regressor</span>
+                            <span class="skill-chip px-3 py-1 rounded-full text-sm">Computer Vision (CNN/RF)</span>
+                            <span class="skill-chip px-3 py-1 rounded-full text-sm">NLP Models</span>
+                            <span class="skill-chip px-3 py-1 rounded-full text-sm">OpenCV</span>
+                            <span class="skill-chip px-3 py-1 rounded-full text-sm">Tesseract Engine (OCR)</span>
+                        </div>
+                    </div>
+
+                    <!-- Category 3: Tools & Frameworks -->
+                    <div class="p-6 rounded-xl bg-white border border-gray-200 hover:border-accent transition duration-300 shadow-lg animate-on-scroll" style="transition-delay: 0.2s;">
+                        <h3 class="text-2xl font-semibold mb-4 text-accent">Tools & Frameworks</h3>
+                        <div class="flex flex-wrap gap-3">
+                            <span class="skill-chip px-3 py-1 rounded-full text-sm">Flask</span>
+                            <span class="skill-chip px-3 py-1 rounded-full text-sm">Plotly</span>
+                            <span class="skill-chip px-3 py-1 rounded-full text-sm">Jupyter Notebook</span>
+                            <span class="skill-chip px-3 py-1 rounded-full text-sm">Git & GitHub</span>
+                            <span class="skill-chip px-3 py-1 rounded-full text-sm">WebGIS (Atlas)</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        
+        <!-- NEW SECTION: 3. Experience & Training -->
+        <section id="experience" class="py-20 px-4 sm:px-6 lg:px-8 bg-white">
+            <div class="max-w-7xl mx-auto">
+                <h2 class="text-center mx-auto text-gray-900 animate-on-scroll">Experience & Training</h2>
+                
+                <div class="grid md:grid-cols-2 gap-10 mt-12">
+                    
+                    <!-- Experience Card: Data Analytics Intern -->
+                    <div class="p-8 rounded-xl bg-gray-50 border border-gray-200 shadow-md animate-on-scroll">
+                        <span class="text-accent text-lg font-medium mb-2 block">Data Analytics Intern</span>
+                        <h3 class="text-3xl font-bold mb-4 text-gray-900">Imarticus Learning</h3>
+                        <ul class="list-disc list-inside text-gray-700 space-y-2 text-base">
+                            <li>Gained hands-on experience in data analytics through real-world projects and case studies.</li>
+                            <li>Applied data cleaning, exploratory data analysis (EDA), and visualization using Python, SQL, and Power BI.</li>
+                            <li>Collaborated with mentors to understand workflows and best practices in an EdTech environment.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Training & Certification Card -->
+                    <div class="p-8 rounded-xl bg-gray-50 border border-gray-200 shadow-md animate-on-scroll" style="transition-delay: 0.1s;">
+                        <span class="text-accent text-lg font-medium mb-2 block">Certifications & Workshops</span>
+                        <h3 class="text-3xl font-bold mb-4 text-gray-900">Professional Development</h3>
+                        <ul class="list-disc list-inside text-gray-700 space-y-2 text-base">
+                            <li>Google Advanced Data Analytics Professional Certificate (Ongoing, 6 months)</li>
+                            <li>Microsoft Excel with AI Certification Office Master</li>
+                            <li>UI/UX Internship - CODSOFT (ISO & MSME Certified, 4 weeks)</li>
+                            <li>Python, RDBMS (MySQL), Scilab, Git - IIT Bombay (Spoken Tutorial Project)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Projects -->
+        <section id="projects" class="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50">
+            <div class="max-w-7xl mx-auto">
+                <h2 class="text-center mx-auto text-gray-900 animate-on-scroll">Featured Projects</h2>
+                
+                <div class="project-showcase">
+                    
+                    <article class="project-showcase__card animate-on-scroll">
+                        <div class="project-showcase__media">
+                            <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80" alt="Top view of maps and planning boards" loading="lazy" decoding="async" />
+                        </div>
+                        <div class="project-showcase__content">
+                            <p class="project-showcase__eyebrow">AI + WEBGIS</p>
+                            <h3 class="project-showcase__title">Smart India Hackathon 2025</h3>
+                            <p class="project-showcase__desc">
+                                Led a full-stack AI and WebGIS platform that digitizes legacy Forest Rights Act records using OCR, NLP, and satellite imagery. Delivered an FRA Atlas and decision cockpit so district officers can validate claims in minutes.
+                            </p>
+                            <div class="project-showcase__badges">
+                                <span class="project-badge">3× faster claim audits</span>
+                                <span class="project-badge">OCR + CV pipeline</span>
+                                <span class="project-badge">FRA Atlas</span>
+                            </div>
+                            <div class="project-showcase__cta">
+                                <a href="https://github.com/piyush-nirmal" target="_blank" rel="noopener" class="btn-accent py-3 px-6 rounded-lg text-base">View case study</a>
+                                <a href="https://github.com/piyush-nirmal" target="_blank" rel="noopener" class="project-link">
+                                    Explore GitHub
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M7 17L17 7"></path>
+                                        <path d="M7 7h10v10"></path>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="project-showcase__card animate-on-scroll" style="transition-delay: 0.1s;">
+                        <div class="project-showcase__media">
+                            <img src="https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=1200&q=80" alt="Financial dashboard on laptop" loading="lazy" decoding="async" />
+                        </div>
+                        <div class="project-showcase__content">
+                            <p class="project-showcase__eyebrow">ML + FINANCE</p>
+                            <h3 class="project-showcase__title">Gold Price Prediction</h3>
+                            <p class="project-showcase__desc">
+                                Production-ready Random Forest model (R² 0.987) that ingests SPX, USO, SLV, and EUR/USD feeds to forecast GLD price action. Includes a Plotly dashboard with alerting states and hedging recommendations.
+                            </p>
+                            <div class="project-showcase__badges">
+                                <span class="project-badge">R² 0.987</span>
+                                <span class="project-badge">Realtime feed</span>
+                                <span class="project-badge">Plotly Ops UI</span>
+                            </div>
+                            <div class="project-showcase__cta">
+                                <a href="https://github.com/piyush-nirmal" target="_blank" rel="noopener" class="btn-accent py-3 px-6 rounded-lg text-base">See the model</a>
+                                <a href="https://github.com/piyush-nirmal" target="_blank" rel="noopener" class="project-link">
+                                    View repo
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M7 17L17 7"></path>
+                                        <path d="M7 7h10v10"></path>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="project-showcase__card animate-on-scroll" style="transition-delay: 0.2s;">
+                        <div class="project-showcase__media">
+                            <img src="https://images.unsplash.com/photo-1517430816045-df4b7de11d1d?auto=format&fit=crop&w=1200&q=80" alt="Documents with OCR highlights" loading="lazy" decoding="async" />
+                        </div>
+                        <div class="project-showcase__content">
+                            <p class="project-showcase__eyebrow">INTELLIGENT AUTOMATION</p>
+                            <h3 class="project-showcase__title">Multilingual OCR Pipeline</h3>
+                            <p class="project-showcase__desc">
+                                Built a modular OpenCV + Tesseract service that cleans scans, detects regions, and extracts structured copy across 80+ languages. Deployment supports REST hooks plus batch queues for 100k+ documents/day.
+                            </p>
+                            <div class="project-showcase__badges">
+                                <span class="project-badge">80+ languages</span>
+                                <span class="project-badge">Auto layout detection</span>
+                                <span class="project-badge">100k docs / day</span>
+                            </div>
+                            <div class="project-showcase__cta">
+                                <a href="https://github.com/piyush-nirmal" target="_blank" rel="noopener" class="btn-accent py-3 px-6 rounded-lg text-base">View pipeline</a>
+                                <a href="https://github.com/piyush-nirmal" target="_blank" rel="noopener" class="project-link">
+                                    Read docs
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M7 17L17 7"></path>
+                                        <path d="M7 7h10v10"></path>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="project-showcase__card animate-on-scroll" style="transition-delay: 0.3s;">
+                        <div class="project-showcase__media">
+                            <img src="C:\My Portfolio\Images\employee_welnness.jpg" alt="Productivity setup with analytics dashboard" loading="lazy" decoding="async" />
+                        </div>
+                        <div class="project-showcase__content">
+                            <p class="project-showcase__eyebrow">PEOPLE ANALYTICS</p>
+                            <h3 class="project-showcase__title">Employee Wellness Command Center</h3>
+                            <p class="project-showcase__desc">
+                                Flask + Plotly application that unifies survey, attendance, and wearable streams. Stakeholders explore burnout risk, anonymized personas, and ROI scenarios through cinematic micro-interactions.
+                            </p>
+                            <div class="project-showcase__badges">
+                                <span class="project-badge">-18% burnout risk</span>
+                                <span class="project-badge">Live anomaly alerts</span>
+                                <span class="project-badge">Executive-ready decks</span>
+                            </div>
+                            <div class="project-showcase__cta">
+                                <a href="https://github.com/piyush-nirmal" target="_blank" rel="noopener" class="btn-accent py-3 px-6 rounded-lg text-base">Open dashboard</a>
+                                <a href="https://github.com/piyush-nirmal" target="_blank" rel="noopener" class="project-link">
+                                    Source code
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M7 17L17 7"></path>
+                                        <path d="M7 7h10v10"></path>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="project-showcase__card project-showcase__card--cta animate-on-scroll" style="transition-delay: 0.4s;">
+                        <div class="project-showcase__content">
+                            <p class="project-showcase__eyebrow">MORE BUILDS</p>
+                            <h3 class="project-showcase__title">Curious about the rest?</h3>
+                            <p class="project-showcase__desc">
+                                Browse pipelines, dashboards, and hackathon experiments that didn’t make the shortlist. I keep shipping weekly—ML notebooks, automation scripts, and productized insights for stakeholders.
+                            </p>
+                            <div class="project-showcase__badges">
+                                <span class="project-badge">15+ live repos</span>
+                                <span class="project-badge">Weekly shipping</span>
+                                <span class="project-badge">Open-source first</span>
+                            </div>
+                            <div class="project-showcase__cta" style="justify-content: center;">
+                                <a href="https://github.com/piyush-nirmal" target="_blank" rel="noopener" class="cta-ghost">
+                                    Visit my GitHub
+                                </a>
+                                <a href="mailto:piyushnirmal.dev@gmail.com" class="project-link">
+                                    Start a build
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M7 17L17 7"></path>
+                                        <path d="M7 7h10v10"></path>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. About Me / Contact -->
+        <section id="contact" class="py-20 px-4 sm:px-6 lg:px-8 bg-white">
+            <div class="max-w-7xl mx-auto p-8 rounded-xl bg-gray-50 shadow-xl border border-gray-200 animate-on-scroll">
+                <h2 class="text-gray-900 mx-auto text-center md:text-left">Get In Touch</h2>
+                
+                <div class="mt-8 grid md:grid-cols-2 gap-8">
+                    
+                    <!-- About Summary -->
+                    <div>
+                        <h3 class="text-2xl font-bold mb-4 text-gray-900">Summary & Education</h3>
+                        <p class="text-gray-700 mb-4">
+                            My focus is on transforming raw data into strategic assets. I bring hands-on experience in data cleaning, exploratory data analysis, and visualization using Python, SQL, and Power BI, gained during my Data Analytics Internship at Imarticus Learning.
+                        </p>
+                        <p class="text-gray-700">
+                            I am currently pursuing a **BSc Information Technology** at Vidyalankar School of Information Technology, Mumbai (Expected Graduation: 2026).
+                        </p>
+                    </div>
+
+                    <!-- Contact Details -->
+                    <div>
+                        <h3 class="text-2xl font-bold mb-4 text-gray-900">Contact & Connect</h3>
+                        <div class="space-y-4">
+                            <p class="flex items-center text-gray-700">
+                                <span class="text-accent mr-3">📧</span> 
+                                <a href="mailto:piyushnirmal.dev@gmail.com" class="hover:text-accent transition duration-300">piyushnirmal.dev@gmail.com</a>
+                            </p>
+                            <p class="flex items-center text-gray-700">
+                                <span class="text-accent mr-3">🔗</span> 
+                                <a href="https://www.linkedin.com/in/piyush-nirmal" target="_blank" class="hover:text-accent transition duration-100">LinkedIn Profile</a>
+                            </p>
+                            <p class="flex items-center text-gray-700">
+                                <span class="text-accent mr-3">💻</span> 
+                                <a href="https://github.com/piyush-nirmal" target="_blank" class="hover:text-accent transition duration-100">GitHub Repositories</a>
+                            </p>
+                        </div>
+                        <div class="mt-8">
+                            <a href="#home" class="btn-accent py-3 px-6 rounded-lg font-semibold text-base hover:shadow-lg">
+                                Back to Top
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="text-center py-6 border-t border-gray-200 mt-10 bg-white">
+            <p class="text-sm text-gray-500">
+                &copy; <span id="current-year"></span> Piyush Nirmal. Built with a passion for Data & Code.
+            </p>
+        </footer>
+
+    </main>
+
+    <script>
+        
+        // (Navigation logic removed; original sticky nav restored)
+
+        // ===============================================
+        // FLOATING NAVIGATION
+        // ===============================================
+        function initFloatingNav() {
+            const nav = document.getElementById('navbar');
+            if (!nav) return;
+
+            const toggleFloat = () => {
+                if (window.scrollY > 8) {
+                    nav.classList.add('is-floating');
+                } else {
+                    nav.classList.remove('is-floating');
+                }
+            };
+
+            toggleFloat();
+            window.addEventListener('scroll', toggleFloat);
+        }
+
+        function initNavToggle() {
+            const toggle = document.querySelector('.floating-nav-toggle');
+            const links = document.querySelector('.floating-nav-links');
+            if (!toggle || !links) return;
+
+            const setState = open => {
+                toggle.classList.toggle('is-open', open);
+                links.classList.toggle('is-open', open);
+                toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+            };
+
+            toggle.addEventListener('click', () => {
+                setState(!toggle.classList.contains('is-open'));
+            });
+
+            links.querySelectorAll('a').forEach(anchor => {
+                anchor.addEventListener('click', () => setState(false));
+            });
+        }
+
+        function initLogoLoop() {
+            document.querySelectorAll('[data-logoloop]').forEach(loop => {
+                const track = loop.querySelector('.logoloop__track');
+                if (!track || track.dataset.looped) return;
+                track.innerHTML = track.innerHTML + track.innerHTML;
+                track.dataset.looped = 'true';
+                const totalWidth = track.scrollWidth;
+                const duration = Math.max(16, totalWidth / 140);
+                track.style.animationDuration = `${duration}s`;
+            });
+        }
+
+        // ===============================================
+        // THREE.JS PARTICLE FLOW BACKGROUND LOGIC (ENHANCED FOR LASER EFFECT)
+        // ===============================================
+        let scene, camera, renderer, particles, particleCount, geometry, material;
+        // Global light source
+        let pointLight; 
+        let mouseX = 0, mouseY = 0;
+        let windowHalfX = window.innerWidth / 2;
+        let windowHalfY = window.innerHeight / 2;
+        const PARTICLE_COLOR = 0xc53030; // Maroon/Red Accent color
+        // Increased particle count for denser, "fog-like" effect
+        const PARTICLE_DENSITY = 1000; 
+
+        function initParticles() {
+            const canvas = document.getElementById('particle-canvas');
+            if (!canvas) return;
+            const viewportWidth = window.innerWidth;
+            const viewportHeight = window.innerHeight;
+            
+            // 1. Scene setup
+            scene = new THREE.Scene();
+            
+            // 2. Camera setup (Perspective camera for a slight 3D look)
+            camera = new THREE.PerspectiveCamera(75, viewportWidth / viewportHeight, 0.1, 1000);
+            camera.position.z = 50;
+
+            // 3. Renderer setup
+            renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
+            renderer.setSize(viewportWidth, viewportHeight);
+            renderer.setPixelRatio(window.devicePixelRatio);
+
+            // 4. Lighting (Simulate the 'glow' or 'fog' effect)
+            scene.add(new THREE.AmbientLight(0x404040)); // Soft ambient light
+
+            pointLight = new THREE.PointLight(0xffffff, 1, 100);
+            pointLight.position.set(0, 0, 0); // Start at the center
+            scene.add(pointLight);
+
+            // 5. Geometry and Material
+            particleCount = PARTICLE_DENSITY;
+            geometry = new THREE.BufferGeometry();
+            const positions = [];
+            const colors = [];
+            const color = new THREE.Color();
+            
+            // Create particles scattered in a 3D box for depth
+            for (let i = 0; i < particleCount; i++) {
+                // positions: wider spread for a deeper look
+                const x = (Math.random() - 0.5) * 400;
+                const y = (Math.random() - 0.5) * 400;
+                const z = (Math.random() - 0.5) * 400;
+                positions.push(x, y, z);
+                
+                // colors: strong accent color for "laser" feel
+                color.setHex(PARTICLE_COLOR);
+                color.multiplyScalar(Math.random() * 0.5 + 0.8); // Higher intensity
+                colors.push(color.r, color.g, color.b);
+            }
+            
+            geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+            geometry.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
+            
+            material = new THREE.PointsMaterial({
+                size: 2,
+                vertexColors: true,
+                transparent: true,
+                opacity: 0.63, // 30% reduction for softer glow
+                sizeAttenuation: true
+            });
+
+            particles = new THREE.Points(geometry, material);
+            scene.add(particles);
+
+            // 6. Event Listeners
+            document.addEventListener('mousemove', onDocumentMouseMove, false);
+            window.addEventListener('resize', onWindowResize, false);
+        }
+        
+        function onDocumentMouseMove(event) {
+            mouseX = (event.clientX - windowHalfX);
+            mouseY = (event.clientY - windowHalfY);
+        }
+
+        function onWindowResize() {
+            const viewportWidth = window.innerWidth;
+            const viewportHeight = window.innerHeight;
+            windowHalfX = viewportWidth / 2;
+            windowHalfY = viewportHeight / 2;
+
+            // Update camera projection matrix for perspective
+            camera.aspect = viewportWidth / viewportHeight;
+            camera.updateProjectionMatrix();
+
+            renderer.setSize(viewportWidth, viewportHeight);
+        }
+
+        function animateParticles() {
+            requestAnimationFrame(animateParticles);
+            
+            // Camera movement for subtle rotation and parallax
+            camera.position.x += (mouseX * 0.05 - camera.position.x) * 0.05;
+            camera.position.y += (-mouseY * 0.05 - camera.position.y) * 0.05;
+            camera.lookAt(scene.position);
+            
+            // Rotate the entire particle system slowly
+            particles.rotation.y += 0.0005;
+            particles.rotation.x += 0.00005;
+            
+            // Update light source position to follow mouse (clamped)
+            pointLight.position.x = mouseX * 0.1;
+            pointLight.position.y = -mouseY * 0.1;
+
+            // Simple Flow (translate particles slightly)
+            const positions = particles.geometry.attributes.position.array;
+            const flowSpeed = 0.05;
+            for (let i = 0; i < particleCount; i++) {
+                const i3 = i * 3;
+                positions[i3 + 2] += flowSpeed; // Push particles towards the camera (Z-axis)
+
+                // When particle is too close, reset it far away
+                if (positions[i3 + 2] > 200) {
+                    positions[i3 + 2] = -200; 
+                }
+            }
+            particles.geometry.attributes.position.needsUpdate = true;
+            
+            renderer.render(scene, camera);
+        }
+        
+        // ===============================================
+        // PURE JAVASCRIPT RAINBOW CURSOR LOGIC (From previous request)
+        // ===============================================
+
+        function initRainbowCursor() {
+            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+            if (prefersReducedMotion.matches) {
+                console.log('Reduced motion is enabled - cursor animation disabled');
+                return;
+            }
+
+            // --- Configuration ---
+            const LENGTH = 15; // Number of particles in the trail
+            // Subtle rainbow matching the red accent theme
+            const COLORS = ['#c53030', '#d64500', '#ff9900', '#f1c40f', '#c53030']; 
+            const SIZE = 2.5;
+            const TRAIL_SPEED = 0.35;
+            const COLOR_CYCLE_SPEED = 0.005;
+            const BLUR = 0;
+            const PULSE_SPEED = 0.01;
+            const PULSE_MIN = 0.9;
+            const PULSE_MAX = 1.1;
+
+            // --- State ---
+            let cursor = { x: 0, y: 0 };
+            let particles = [];
+            let cursorsInitted = false;
+            let time = 0;
+            let canvas, ctx;
+
+            // --- Particle Class ---
+            class Particle {
+                constructor(x, y) {
+                    this.position = { x, y };
+                }
+            }
+
+            // --- Utility Functions ---
+            const interpolateColors = (color1, color2, factor) => {
+                const r1 = parseInt(color1.substring(1, 3), 16);
+                const g1 = parseInt(color1.substring(3, 5), 16);
+                const b1 = parseInt(color1.substring(5, 7), 16);
+
+                const r2 = parseInt(color2.substring(1, 3), 16);
+                const g2 = parseInt(color2.substring(3, 5), 16);
+                const b2 = parseInt(color2.substring(5, 7), 16);
+
+                const r = Math.round(r1 + (r2 - r1) * factor);
+                const g = Math.round(g1 + (g2 - g1) * factor);
+                const b = Math.round(b1 + (b2 - b1) * factor);
+
+                return `rgb(${r}, ${g}, ${b})`;
+            };
+
+            const getPulseSize = (baseSize, currentTime) => {
+                const pulse = Math.sin(currentTime * PULSE_SPEED);
+                const scaleFactor = PULSE_MIN + ((pulse + 1) * (PULSE_MAX - PULSE_MIN)) / 2;
+                return baseSize * scaleFactor;
+            };
+
+            // --- Setup ---
+            canvas = document.createElement('canvas');
+            ctx = canvas.getContext('2d', { alpha: true });
+
+            canvas.style.top = '0px';
+            canvas.style.left = '0px';
+            canvas.style.pointerEvents = 'none';
+            canvas.style.position = 'fixed';
+            canvas.style.zIndex = '9999'; // Ensure it's on top
+
+            document.body.appendChild(canvas);
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            // --- Event Handlers ---
+            const onMouseMove = (e) => {
+                cursor.x = e.clientX;
+                cursor.y = e.clientY;
+
+                if (!cursorsInitted) {
+                    cursorsInitted = true;
+                    for (let i = 0; i < LENGTH; i++) {
+                        particles.push(new Particle(cursor.x, cursor.y));
+                    }
+                }
+            };
+
+            const onWindowResizeCursor = () => {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            };
+            
+            // --- Core Update Logic ---
+            const updateParticlesCursor = () => {
+                if (!ctx || !canvas) return;
+
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.lineJoin = 'round';
+
+                if (BLUR > 0) {
+                    ctx.filter = `blur(${BLUR}px)`;
+                } else {
+                    ctx.filter = 'none';
+                }
+
+                const particleSets = [];
+                let x = cursor.x;
+                let y = cursor.y;
+
+                // 1. Update particle positions and build set for drawing
+                particles.forEach((particle, index) => {
+                    const nextParticle = particles[index + 1] || particles[0];
+
+                    // Use current mouse position (x, y) for the head particle's target
+                    particle.position.x = x;
+                    particle.position.y = y;
+
+                    particleSets.push({ x, y });
+
+                    // Interpolate next particle's position towards the current one
+                    x += (nextParticle.position.x - particle.position.x) * TRAIL_SPEED;
+                    y += (nextParticle.position.y - particle.position.y) * TRAIL_SPEED;
+                });
+
+                // 2. Time-based color cycling
+                time += COLOR_CYCLE_SPEED;
+                const colorOffset = time % 1;
+
+                // 3. Dynamic size based on pulse
+                const currentSize = getPulseSize(SIZE, time);
+
+                // 4. Draw the trail by iterating through color segments
+                COLORS.forEach((color, index) => {
+                    const nextColor = COLORS[(index + 1) % COLORS.length];
+                    const factor = (index + colorOffset) / COLORS.length;
+                    
+                    ctx.beginPath();
+                    ctx.strokeStyle = interpolateColors(color, nextColor, factor);
+
+                    // Start the line slightly offset to create the segmented look
+                    if (particleSets.length) {
+                        ctx.moveTo(particleSets[0].x, particleSets[0].y + index * (currentSize * 0.5));
+                    }
+
+                    // Draw the line connecting all particle points
+                    particleSets.forEach((set, particleIndex) => {
+                        if (particleIndex !== 0) {
+                            ctx.lineTo(set.x, set.y + index * currentSize);
+                        }
+                    });
+
+                    ctx.lineWidth = currentSize;
+                    ctx.lineCap = 'round';
+                    ctx.stroke();
+                });
+            };
+
+            // --- Animation Loop ---
+            const loop = () => {
+                updateParticlesCursor();
+                requestAnimationFrame(loop);
+            };
+
+            // --- Initialization ---
+            document.body.addEventListener('mousemove', onMouseMove);
+            window.addEventListener('resize', onWindowResizeCursor);
+            loop();
+        }
+
+        // Call the initialization function when the window loads
+        window.onload = function() {
+            initFloatingNav();
+            initNavToggle();
+            initLogoLoop();
+            // Your existing scroll animation initialization
+            const elementsToAnimate = document.querySelectorAll('.animate-on-scroll');
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target); 
+                    }
+                });
+            }, {
+                root: null, 
+                rootMargin: '0px',
+                /* Intersection Observer threshold increased to 0.3 */
+                threshold: 0.3 
+            });
+
+            elementsToAnimate.forEach(element => {
+                const delay = parseFloat(element.style.transitionDelay || 0);
+                if (delay === 0) {
+                     const index = Array.from(elementsToAnimate).indexOf(element);
+                     element.style.transitionDelay = `${(index * 0.1)}s`;
+                }
+                observer.observe(element);
+            });
+            
+            // Set current year in the footer
+            document.getElementById('current-year').textContent = new Date().getFullYear();
+
+            // Initialize the Three.js Particle Background
+            initParticles();
+            animateParticles();
+
+            // Initialize the Rainbow Cursor
+            initRainbowCursor();
+        };
+
+    </script>
+</body>
+</html>

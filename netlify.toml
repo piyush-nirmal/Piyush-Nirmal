@@ -1,11 +1,4 @@
 ## Netlify configuration for the portfolio site
 [build]
   publish = "."
-  command = ""
-
-[[redirects]]
-  from = "/*"
-  to = "/website.html"
-  status = 200
-
-git commit -m "feat: refresh portfolio layout and animations"git commit -m "feat: refresh portfolio layout and animations"
+  command = "echo 'No build step required'"

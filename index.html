@@ -44,6 +44,33 @@
             background-color: transparent;
         }
 
+        /* Increase font sizes in home section by 75% */
+        #home p.text-lg {
+            font-size: 1.97rem !important; /* 1.125rem * 1.75 */
+        }
+        #home h1 {
+            font-size: 6.56rem !important; /* 3.75rem * 1.75 for text-6xl */
+        }
+        #home h1 span {
+            font-size: 1em !important;
+        }
+        @media (min-width: 640px) {
+            #home h1 {
+                font-size: 7.88rem !important; /* 4.5rem * 1.75 for text-7xl */
+            }
+        }
+        @media (min-width: 768px) {
+            #home h1 {
+                font-size: 10.5rem !important; /* 6rem * 1.75 for text-8xl */
+            }
+        }
+        #home p.text-xl {
+            font-size: 1.1rem !important; /* Reduced by 50% from 2.19rem */
+        }
+        #home a.text-lg {
+            font-size: 1.97rem !important; /* 1.125rem * 1.75 */
+        }
+
         /* Canvas for Three.js particles */
         #particle-canvas {
             position: fixed;
@@ -149,11 +176,6 @@
         filter: grayscale(0);
     }
 
-    .logoloop__item img.logo-gemini {
-        height: clamp(40px, 6vw, 60px);
-        transform: scale(3.1);
-        transform-origin: center;
-    }
     @keyframes logoloop-scroll {
         0% {
             transform: translateX(0);
@@ -395,21 +417,22 @@
         .project-showcase__card--cta {
             grid-template-columns: 1fr;
             text-align: center;
-            background: linear-gradient(135deg, #c53030, #ff8a65);
-            color: #fff;
+            background: radial-gradient(circle at 15% 20%, rgba(197, 48, 48, 0.25), transparent 55%), #fff;
+            color: var(--color-text-dark);
+            border: 1px solid rgba(15, 23, 42, 0.08);
         }
 
         .project-showcase__card--cta::before {
-            border-color: rgba(255, 255, 255, 0.45);
+            border-color: rgba(15, 23, 42, 0.08);
         }
 
         .project-showcase__card--cta .project-showcase__desc {
-            color: rgba(255, 255, 255, 0.9);
+            color: var(--color-text-dark);
         }
 
         .project-showcase__card--cta .project-badge {
-            background: rgba(255, 255, 255, 0.2);
-            color: #fff;
+            background: rgba(197, 48, 48, 0.1);
+            color: var(--color-accent);
         }
 
         .project-showcase__eyebrow {
@@ -478,22 +501,23 @@
         }
 
         .project-showcase__card--cta .project-link {
-            color: #fff;
+            color: var(--color-accent);
         }
 
         .project-showcase__card--cta .cta-ghost {
-            background: #fff;
-            color: var(--color-accent);
+            background: var(--color-accent);
+            color: #fff;
             font-weight: 600;
             border-radius: 999px;
             padding: 0.85rem 2.5rem;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.18);
+            box-shadow: 0 4px 10px rgba(197, 48, 48, 0.3);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         .project-showcase__card--cta .cta-ghost:hover {
             transform: translateY(-2px);
-            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.24);
+            box-shadow: 0 10px 20px rgba(197, 48, 48, 0.4);
+            background-color: #9b2c2c;
         }
 
         @media (max-width: 1024px) {
@@ -700,9 +724,6 @@
                         </div>
                         <div class="logoloop__item">
                             <img src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Kaggle_logo.png" alt="Kaggle logo" loading="lazy" decoding="async" />
-                        </div>
-                        <div class="logoloop__item">
-                            <img class="logo-gemini" src="data:image/png;base64,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" alt="Google Gemini logo" loading="lazy" decoding="async" />
                         </div>
                         <div class="logoloop__item">
                             <img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg" alt="Python logo" loading="lazy" decoding="async" />

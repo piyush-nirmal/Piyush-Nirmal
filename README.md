@@ -1,5 +1,5 @@
 <h1 align="center">Hi 👋, I'm Piyush Nirmal</h1>
-<h3 align="center">Data Analyst | SaaS Builder | Full Stack Developer</h3>
+<h3 align="center">Analytics & ML | SaaS Builder | Python Developer</h3>
 
 ---
 

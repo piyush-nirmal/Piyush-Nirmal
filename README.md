@@ -1,107 +1,189 @@
-<h1 align="center">Hi 👋, I'm Piyush Nirmal</h1>
-<h3 align="center">Analytics & ML | SaaS Builder | Python Developer</h3>
+<!-- ✿ pinterest-core readme ✿ palette: blush F5D5D0 · cream FFF5F0 · sage B5C4B1 · dusty rose C98B8B · cocoa 8B6F6F -->
 
----
+<div align="center">
 
-# 💫 About Me
+<img src="https://capsule-render.vercel.app/api?type=waving&color=F5D5D0&height=220&section=header&text=piyush%20nirmal&fontSize=52&fontColor=8B6F6F&fontAlign=50&fontAlignY=40&desc=%E2%9C%BF%20data%20%C3%97%20code%20%C3%97%20quiet%20little%20systems%20%E2%9C%BF&descSize=17&descColor=A98B8B&descAlignY=62" width="100%"/>
 
-🚀 I’m a Data Analyst & SaaS Builder passionate about solving real-world business problems using data and technology.  
+<img src="https://readme-typing-svg.demolab.com?font=Playfair+Display&italic=true&size=20&duration=3500&pause=1200&color=8B6F6F&center=true&vCenter=true&width=560&lines=analytics+%26+ml+%E2%9C%A6+saas+builder+%E2%9C%A6+python+dev;turning+messy+data+into+soft%2C+clear+stories;building+real-world%2C+scalable+things+%F0%9F%8C%B7" alt="typing intro"/>
 
-- 🔭 Building a **SaaS & Web Solutions Agency** (HRMS, ERP, Automation Tools)  
-- 💼 Working on **client-based projects** (Web Apps, Dashboards, Automation Systems)  
-- 📊 Skilled in **Data Analysis, ETL Pipelines, and Visualization (Power BI, Python, SQL)**  
-- 🛠️ Building **full-stack applications and business automation tools**  
-- ⚡ I focus on building **real-world, scalable solutions**, not just projects  
+<br/>
 
-📫 Reach me: **piyushnirmal.dev@gmail.com**
+`✿ ‧₊˚ ⋅ ♡ ⋅ ˚₊‧ ✿`
 
----
+</div>
 
-# 💻 Tech Stack
+<br/>
 
-### 🧠 Data & Analytics
-![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
-![Pandas](https://img.shields.io/badge/Pandas-150458?style=for-the-badge&logo=pandas&logoColor=white)
-![NumPy](https://img.shields.io/badge/NumPy-013243?style=for-the-badge&logo=numpy&logoColor=white)
-![Scikit-learn](https://img.shields.io/badge/Scikit--Learn-F7931E?style=for-the-badge&logo=scikit-learn&logoColor=white)
-![SQL](https://img.shields.io/badge/SQL-025E8C?style=for-the-badge&logo=postgresql&logoColor=white)
-![Power BI](https://img.shields.io/badge/Power%20BI-F2C811?style=for-the-badge&logo=powerbi&logoColor=black)
-![Tableau](https://img.shields.io/badge/Tableau-E97627?style=for-the-badge&logo=tableau&logoColor=white)
+## 🌸 about me
 
----
+> *i build real-world solutions, not just projects.*
 
-### 💻 Full Stack Development
-![JavaScript](https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=yellow)
-![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
-![Next JS](https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=next.js&logoColor=white)
-![Node JS](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white)
-![Express JS](https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white)
-![Flask](https://img.shields.io/badge/Flask-000000?style=for-the-badge&logo=flask&logoColor=white)
-![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
-![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
-![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
+i'm a data analyst & saas builder who loves solving real business problems with data and a little bit of design sense.
 
----
+| | |
+|:--|:--|
+| 🌿 **currently** | building a saas & web solutions agency (hrms, erp, automation tools) |
+| 🎀 **working on** | client projects — web apps, dashboards, automation systems |
+| 🍃 **good at** | data analysis · etl pipelines · visualization (power bi, python, sql) |
+| ☁️ **always** | shipping full-stack apps & business automation that actually scale |
+| 💌 **reach me** | [piyushnirmal.dev@gmail.com](mailto:piyushnirmal.dev@gmail.com) |
 
-### 🗄️ Databases
-![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white)
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)
-![MongoDB](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white)
+<br/>
 
----
+<div align="center">
 
-### ⚙️ Tools & Technologies
-![Git](https://img.shields.io/badge/Git-F05033?style=for-the-badge&logo=git&logoColor=white)
-![GitHub](https://img.shields.io/badge/GitHub-121011?style=for-the-badge&logo=github&logoColor=white)
-![Postman](https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=postman&logoColor=white)
-![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
-![VS Code](https://img.shields.io/badge/VS_Code-007ACC?style=for-the-badge&logo=visual%20studio%20code&logoColor=white)
----
+`⋆｡°✩ ━━━━━━ ✿ ━━━━━━ ✩°｡⋆`
 
-## 🚀 What I Build
-- SaaS Applications (HRMS, ERP, Business Tools)  
-- Data Dashboards & Analytics Systems  
-- Automation Workflows (Python-based)  
-- Full Stack Web Applications  
+</div>
 
----
+## 🍂 tech stack
 
-## 📂 Featured Projects
+**data & analytics**
 
-| Project Name | Description | Tech Stack |
-|-------------|------------|-----------|
-| **Employee Wellness Dashboard** | Interactive dashboard analyzing mental health survey data with insights & visualization | Flask, Plotly, Python |
-| **Sports League Analysis System** | SQL-based system for managing league data and analyzing player/team performance | MySQL, SQL |
-| **OCR Pipeline** | Extracts text from images/PDFs in 80+ languages using computer vision | OpenCV, Tesseract, Python |
-| **Sales ETL Pipeline** | End-to-end pipeline for extracting, transforming, and visualizing sales data | Python, Pandas, MySQL, Power BI |
+![Python](https://img.shields.io/badge/python-F5D5D0?style=flat-square&logo=python&logoColor=8B6F6F)
+![Pandas](https://img.shields.io/badge/pandas-E8D5C4?style=flat-square&logo=pandas&logoColor=8B6F6F)
+![NumPy](https://img.shields.io/badge/numpy-DCE5D8?style=flat-square&logo=numpy&logoColor=8B6F6F)
+![Scikit-learn](https://img.shields.io/badge/scikit--learn-F8E1D4?style=flat-square&logo=scikit-learn&logoColor=8B6F6F)
+![SQL](https://img.shields.io/badge/sql-E6D9E8?style=flat-square&logo=postgresql&logoColor=8B6F6F)
+![Power BI](https://img.shields.io/badge/power%20bi-F7E8C3?style=flat-square&logo=powerbi&logoColor=8B6F6F)
+![Tableau](https://img.shields.io/badge/tableau-F5D5D0?style=flat-square&logo=tableau&logoColor=8B6F6F)
 
----
+**full stack**
 
-## 🏆 Certifications & Achievements
+![JavaScript](https://img.shields.io/badge/javascript-F7E8C3?style=flat-square&logo=javascript&logoColor=8B6F6F)
+![React](https://img.shields.io/badge/react-D9E8EC?style=flat-square&logo=react&logoColor=8B6F6F)
+![Next.js](https://img.shields.io/badge/next.js-E8D5C4?style=flat-square&logo=next.js&logoColor=8B6F6F)
+![Node.js](https://img.shields.io/badge/node.js-DCE5D8?style=flat-square&logo=node.js&logoColor=8B6F6F)
+![Express](https://img.shields.io/badge/express-F0E4DA?style=flat-square&logo=express&logoColor=8B6F6F)
+![Flask](https://img.shields.io/badge/flask-E6D9E8?style=flat-square&logo=flask&logoColor=8B6F6F)
+![HTML5](https://img.shields.io/badge/html5-F8E1D4?style=flat-square&logo=html5&logoColor=8B6F6F)
+![CSS3](https://img.shields.io/badge/css3-D9E8EC?style=flat-square&logo=css3&logoColor=8B6F6F)
+![Tailwind](https://img.shields.io/badge/tailwind-DCE5D8?style=flat-square&logo=tailwind-css&logoColor=8B6F6F)
 
-- 📜 RDBMS PostgreSQL – Spoken Tutorial Project, IIT Bombay  
-- 📜 Python Training – Google  
-- 📜 Excel with AI (Dashboards, Macros, VBA) – Office Master  
-- 📜 Git Training – IIT Bombay Spoken Tutorial  
+**databases**
 
-### 🏅 Achievements
-- 🚀 Built end-to-end ETL pipeline with real-world data integration  
-- 📊 Developed multiple dashboards and analytics systems  
-- 💼 Completed internships in Data Analytics & Development  
-- 🛠️ Actively building SaaS products and automation solutions  
+![MySQL](https://img.shields.io/badge/mysql-D9E8EC?style=flat-square&logo=mysql&logoColor=8B6F6F)
+![PostgreSQL](https://img.shields.io/badge/postgresql-E6D9E8?style=flat-square&logo=postgresql&logoColor=8B6F6F)
+![MongoDB](https://img.shields.io/badge/mongodb-DCE5D8?style=flat-square&logo=mongodb&logoColor=8B6F6F)
 
----
+**tools**
 
-## 🌐 Connect With Me
-- 💼 LinkedIn: https://www.linkedin.com/in/piyush-nirmal  
-- 💻 GitHub: https://github.com/piyush-nirmal  
+![Git](https://img.shields.io/badge/git-F8E1D4?style=flat-square&logo=git&logoColor=8B6F6F)
+![GitHub](https://img.shields.io/badge/github-E8D5C4?style=flat-square&logo=github&logoColor=8B6F6F)
+![Postman](https://img.shields.io/badge/postman-F5D5D0?style=flat-square&logo=postman&logoColor=8B6F6F)
+![Docker](https://img.shields.io/badge/docker-D9E8EC?style=flat-square&logo=docker&logoColor=8B6F6F)
+![VS Code](https://img.shields.io/badge/vs%20code-E6D9E8?style=flat-square&logo=visual%20studio%20code&logoColor=8B6F6F)
 
----
+<div align="center">
 
-## 📊 GitHub Stats
-![](https://github-readme-stats.shion.dev/api?username=piyush-nirmal&theme=tokyonight&hide_border=true&include_all_commits=false&count_private=false)
-![](https://streak-stats.demolab.com/?user=piyush-nirmal&theme=tokyonight&hide_border=true)
+`⋆｡°✩ ━━━━━━ ✿ ━━━━━━ ✩°｡⋆`
 
----
+</div>
 
-⚡ *I build real-world solutions, not just projects.*
+## 🕊️ what i build
+
+<table>
+<tr>
+<td align="center" width="25%">☁️<br/><b>saas apps</b><br/><sub>hrms · erp · business tools</sub></td>
+<td align="center" width="25%">🌷<br/><b>dashboards</b><br/><sub>analytics systems</sub></td>
+<td align="center" width="25%">🍃<br/><b>automation</b><br/><sub>python workflows</sub></td>
+<td align="center" width="25%">🎀<br/><b>full stack</b><br/><sub>web applications</sub></td>
+</tr>
+</table>
+
+<div align="center">
+
+`⋆｡°✩ ━━━━━━ ✿ ━━━━━━ ✩°｡⋆`
+
+</div>
+
+## 🌼 featured projects
+
+<table>
+<tr>
+<td width="50%" valign="top">
+
+### 🌿 employee wellness dashboard
+interactive dashboard analyzing mental health survey data — insights, visualized softly.
+
+`flask` `plotly` `python`
+
+</td>
+<td width="50%" valign="top">
+
+### 🏆 sports league analysis
+sql-based system for managing league data and analyzing player & team performance.
+
+`mysql` `sql`
+
+</td>
+</tr>
+<tr>
+<td width="50%" valign="top">
+
+### 🔍 ocr pipeline
+extracts text from images & pdfs in 80+ languages using computer vision.
+
+`opencv` `tesseract` `python`
+
+</td>
+<td width="50%" valign="top">
+
+### 🌊 sales etl pipeline
+end-to-end pipeline to extract, transform & visualize sales data.
+
+`python` `pandas` `mysql` `power bi`
+
+</td>
+</tr>
+</table>
+
+<div align="center">
+
+`⋆｡°✩ ━━━━━━ ✿ ━━━━━━ ✩°｡⋆`
+
+</div>
+
+## 🎐 certifications & little wins
+
+- 📜 rdbms postgresql — spoken tutorial project, iit bombay
+- 📜 python training — google
+- 📜 excel with ai (dashboards, macros, vba) — office master
+- 📜 git training — iit bombay spoken tutorial
+
+**wins**
+- 🌸 built an end-to-end etl pipeline with real-world data integration
+- 🌸 developed multiple dashboards and analytics systems
+- 🌸 completed internships in data analytics & development
+- 🌸 actively building saas products and automation solutions
+
+<div align="center">
+
+`⋆｡°✩ ━━━━━━ ✿ ━━━━━━ ✩°｡⋆`
+
+</div>
+
+## 📊 github stats
+
+<div align="center">
+
+<img height="170" src="https://github-readme-stats.shion.dev/api?username=piyush-nirmal&hide_border=false&include_all_commits=false&count_private=false&bg_color=FFF5F0&title_color=C98B8B&text_color=8B6F6F&icon_color=B5C4B1&border_color=F0D9D0&border_radius=16"/>
+<img height="170" src="https://streak-stats.demolab.com/?user=piyush-nirmal&background=FFF5F0&ring=C98B8B&fire=E8A598&currStreakLabel=8B6F6F&sideLabels=8B6F6F&currStreakNum=8B6F6F&sideNums=8B6F6F&dates=B5A5A5&border=F0D9D0&stroke=F0D9D0&hide_border=false&border_radius=16"/>
+
+</div>
+
+## 💌 let's connect
+
+<div align="center">
+
+[![LinkedIn](https://img.shields.io/badge/linkedin-D9E8EC?style=for-the-badge&logo=linkedin&logoColor=8B6F6F)](https://www.linkedin.com/in/piyush-nirmal)
+[![GitHub](https://img.shields.io/badge/github-E8D5C4?style=for-the-badge&logo=github&logoColor=8B6F6F)](https://github.com/piyush-nirmal)
+[![Email](https://img.shields.io/badge/email-F5D5D0?style=for-the-badge&logo=gmail&logoColor=8B6F6F)](mailto:piyushnirmal.dev@gmail.com)
+
+<br/>
+
+*✿ i build real-world solutions, not just projects ✿*
+
+<img src="https://capsule-render.vercel.app/api?type=waving&color=F5D5D0&height=120&section=footer" width="100%"/>
+
+</div>
